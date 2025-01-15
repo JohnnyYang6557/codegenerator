@@ -1,6 +1,7 @@
 ### Custom template
 .idea
 code_generator.iml
+generated
 
 ### Java template
 # Compiled class file

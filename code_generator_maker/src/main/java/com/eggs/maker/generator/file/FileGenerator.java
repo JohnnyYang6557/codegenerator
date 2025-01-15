@@ -1,15 +1,13 @@
-package com.yupi.generator;
+package com.eggs.maker.generator.file;
 
 import freemarker.template.TemplateException;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.jar.Manifest;
 
-import static com.yupi.generator.DynamicGenerator.doGenerate;
-import static com.yupi.generator.StaticGenerator.copyFilesByHutool;
+import static com.eggs.maker.generator.file.StaticFileGenerator.copyFilesByHutool;
 
-public class MainGenerator {
+public class FileGenerator {
     public static void doGenerate(Object model) throws TemplateException, IOException {
 
         //静态文件生成
@@ -24,15 +22,8 @@ public class MainGenerator {
         //C:\Users\ycyg6\IdeaProjects\code_generator\acm-template\src\com\yupi\acm\MainTemplate.java
         String dynamicInputPath = projectPath + File.separator  + "src\\main\\resources\\templates\\MainTemplate.java.ftl";
         String dynamicOutputPath = projectPath + File.separator + "acm-template\\src\\com\\yupi\\acm\\MainTemplate.java";
-        DynamicGenerator.doGenerate(dynamicInputPath, dynamicOutputPath, model);
+        DynamicFileGenerator.doGenerate(dynamicInputPath, dynamicOutputPath, model);
         System.out.println("MainGenerator done.");
     }
 
-    public static void main(String[] args) throws TemplateException, IOException {
-//        MainTemplateConfig mainTemplateConfig = new MainTemplateConfig();
-//        mainTemplateConfig.setAuthor("eggs");
-//        mainTemplateConfig.setLoop(true);
-//        mainTemplateConfig.setOutputText("output result = ");
-//        doGenerate(mainTemplateConfig);
-    }
 }

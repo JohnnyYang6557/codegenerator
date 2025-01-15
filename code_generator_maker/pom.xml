@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.yupi</groupId>
-    <artifactId>code_generator_basic</artifactId>
+    <groupId>com.yupi.maker</groupId>
+    <artifactId>code_generator_maker</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
@@ -69,7 +69,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>com.yupi.Main</mainClass> <!-- 替换为你的主类的完整类名 -->
+                            <mainClass>com.eggs.maker.Main</mainClass> <!-- 替换为你的主类的完整类名 -->
                         </manifest>
                     </archive>
                 </configuration>
