@@ -5,23 +5,23 @@ import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Writer;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 
 public class DynamicGenerator {
 
     public static void main(String[] args) throws IOException, TemplateException {
-//        String projectPath = System.getProperty("user.dir") + File.separator + "code_generator_basic";
+//        String projectPath = System.getProperty("user.dir");
 //        String inputPath = projectPath + File.separator + "src\\main\\resources\\templates\\MainTemplate.java.ftl";
 //        String outputPath = projectPath + File.separator + "MainTemplate.java";
 //        MainTemplateConfig mainTemplateConfig = new MainTemplateConfig();
 //        mainTemplateConfig.setAuthor("eggs");
 //        mainTemplateConfig.setOutputText("output result：");
 //        mainTemplateConfig.setLoop(true);
-//        doGenerate(inputPath,outputPath,mainTemplateConfig);
+//        doGenerate(inputPath, outputPath, mainTemplateConfig);
 
     }
 
@@ -42,12 +42,11 @@ public class DynamicGenerator {
         Template template = configuration.getTemplate(templateName);
 
 
-
         // 输出文件
-        Writer out = new FileWriter(outputPath);
+        Writer out = new OutputStreamWriter(Files.newOutputStream(Paths.get(outputPath)), StandardCharsets.UTF_8);
 
-        // 模板输出
         template.process(model, out);
+        // 模板输出
         out.close();
     }
 }
