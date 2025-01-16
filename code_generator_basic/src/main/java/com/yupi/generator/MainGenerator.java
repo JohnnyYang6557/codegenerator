@@ -17,7 +17,8 @@ public class MainGenerator {
         String projectPath = System.getProperty("user.dir");
         File parentFile = new File(projectPath).getParentFile();
         String srcPath = parentFile + File.separator + "code_generator_demo_projects"+ File.separator + "acm-template";
-        copyFilesByHutool(srcPath, projectPath);
+        String destPath = projectPath;
+        copyFilesByHutool(srcPath, destPath);
 
 
         //在生成的静态文件基础上，生成动态文件生成
