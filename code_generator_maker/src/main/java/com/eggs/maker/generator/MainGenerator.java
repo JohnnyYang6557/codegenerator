@@ -1,6 +1,7 @@
 package com.eggs.maker.generator;
 
 import cn.hutool.core.io.FileUtil;
+import cn.hutool.core.io.resource.ClassPathResource;
 import cn.hutool.core.util.StrUtil;
 import com.eggs.maker.generator.file.DynamicFileGenerator;
 import com.eggs.maker.meta.Meta;
@@ -17,13 +18,21 @@ public class MainGenerator {
         System.out.println(meta);
         //输出根路径
         String projectPath = System.getProperty("user.dir");
-        String outputPath = projectPath + File.separator + "generated";
+        String outputPath = projectPath + File.separator + "generated" + File.separator + "acm-template-pro-generator";
         if (!FileUtil.exist(outputPath)) {
             FileUtil.mkdir(outputPath);
         }
+
+        //从原始模板文件路径复制到生成代码包中
+        String sourceRootPath = meta.getFileConfig().getSourceRootPath();
+        String sourceCopyDestPath = outputPath + File.separator + ".source";
+        FileUtil.copy(sourceRootPath,sourceCopyDestPath,true);
+
+
         //读取resources目录
-//        ClassPathResource classPathResource = new ClassPathResource("");
-        String inputResourcePath = "C:\\Users\\ycyg6\\IdeaProjects\\code_generator\\code_generator_maker\\src\\main\\resources";
+        ClassPathResource classPathResource = new ClassPathResource("");
+        String inputResourcePath = classPathResource.getAbsolutePath();
+//        String inputResourcePath = "C:\\Users\\ycyg6\\IdeaProjects\\codegenerator\\code_generator_maker\\src\\main\\resources";
 //        System.out.println(inputResourcePath);
 
         //java包的基础路径
@@ -85,6 +94,13 @@ public class MainGenerator {
         inputFilePath = inputResourcePath + File.separator + "templates/pom.xml.ftl";
         outputFilePath = outputPath + File.separator + "pom.xml";
         DynamicFileGenerator.doGenerate(inputFilePath, outputFilePath, meta);
+
+        //生成README.md
+        inputFilePath = inputResourcePath + File.separator + "templates/README.md.ftl";
+        outputFilePath = outputPath + File.separator + "READ.md";
+        DynamicFileGenerator.doGenerate(inputFilePath, outputFilePath, meta);
+
+
         // 构建 jar 包
         JarGenerator.doGenerate(outputPath);
 
@@ -93,6 +109,21 @@ public class MainGenerator {
         String jarName = String.format("%s-%s-jar-with-dependencies.jar", meta.getName(), meta.getVersion());
         String jarPath = "target/"+ jarName;
         ScriptGenerator.doGenerator(shellOutputFilePath, jarPath);
+
+        //生成精简版的程序
+        String distOutPutPath = outputPath + "-dist";
+        //拷贝jar包
+        String targetAbsolutePath = distOutPutPath + File.separator + "target";
+        FileUtil.mkdir(targetAbsolutePath);
+        String jarAbsolutePath = outputPath + File.separator + jarPath;
+        FileUtil.copy(jarAbsolutePath,targetAbsolutePath,true);
+        //拷贝脚本文件
+        FileUtil.copy(shellOutputFilePath,distOutPutPath,true);
+        FileUtil.copy(shellOutputFilePath+ ".bat",distOutPutPath,true);
+        //拷贝源模板文件
+        FileUtil.copy(sourceCopyDestPath,distOutPutPath,true);
+
+
     }
 
 }

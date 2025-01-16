@@ -6,8 +6,9 @@
   "author": "eggs",
   "createTime": "2025-1-16",
   "fileConfig": {
-    "inputRootPath": "C:/Users/ycyg6/IdeaProjects/code_generator/code_generator_demo_projects/acm-template-pro",
+    "inputRootPath": ".source/acm-template-pro",
     "outputRootPath": "generated",
+    "sourceRootPath": "C:/Users/ycyg6/IdeaProjects/codegenerator/code_generator_demo_projects/acm-template-pro",
     "type": "dir",
     "files": [
       {

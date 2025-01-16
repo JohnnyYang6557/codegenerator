@@ -19,7 +19,7 @@ public class FileGenerator {
 
 
         //在生成的静态文件基础上，生成动态文件生成
-        //C:\Users\ycyg6\IdeaProjects\code_generator\acm-template\src\com\yupi\acm\MainTemplate.java
+        //C:\Users\ycyg6\IdeaProjects\codegenerator\acm-template\src\com\yupi\acm\MainTemplate.java
         String dynamicInputPath = projectPath + File.separator  + "src\\main\\resources\\templates\\MainTemplate.java.ftl";
         String dynamicOutputPath = projectPath + File.separator + "acm-template\\src\\com\\yupi\\acm\\MainTemplate.java";
         DynamicFileGenerator.doGenerate(dynamicInputPath, dynamicOutputPath, model);
