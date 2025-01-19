@@ -28,7 +28,6 @@ public class MainGenerator {
         String sourceCopyDestPath = outputPath + File.separator + ".source";
         FileUtil.copy(sourceRootPath,sourceCopyDestPath,true);
 
-
         //读取resources目录
         ClassPathResource classPathResource = new ClassPathResource("");
         String inputResourcePath = classPathResource.getAbsolutePath();
